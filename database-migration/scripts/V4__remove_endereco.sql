@@ -1,0 +1,1 @@
+alter table clientes drop column endereco;

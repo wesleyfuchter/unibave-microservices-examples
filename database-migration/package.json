@@ -1,0 +1,17 @@
+{
+  "name": "hello-world-node-k8s",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "npm run migrate && node index.js",
+    "migrate": "flyway -c flyway.js migrate",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.1",
+    "node-flywaydb": "^3.0.7"
+  }
+}
