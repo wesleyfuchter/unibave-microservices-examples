@@ -5,9 +5,10 @@ const { MongoClient } = require('mongodb')
 
 const app = express()
 const port = 3000
+const host = 'host.minikube.internal';
 const queue = 'transactions'
-const amqp = 'amqp://localhost:5672'
-const mongoUrl = 'mongodb://localhost:27017'
+const amqp = `amqp://${host}:5672`
+const mongoUrl = `mongodb://${host}:27017`
 const mongoClient = new MongoClient(mongoUrl)
 const dbName = 'transactionsdb'
 
@@ -34,7 +35,7 @@ app.listen(port, () => {
     transactionsCollection = db.collection('transactions')
   }).catch(err => console.err(err))
 
-  console.log(`transaction-service ready at http://localhost:${port}`)
+  console.log(`transaction-service ready at the port ${port}`)
 
 })
 

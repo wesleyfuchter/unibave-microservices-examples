@@ -20,7 +20,7 @@ metadata:
   name: hello-world-app
   namespace: hello-world-namespace
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
       app: hello-world-app
@@ -33,7 +33,7 @@ spec:
     spec:
       containers:
         - name: hello-world-app
-          image: wesleyfuchter/hello-world-app:v2
+          image: wesleyfuchter/hello-world-app:v1
           imagePullPolicy: Always
           ports:
             - containerPort: 3000

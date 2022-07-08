@@ -1,2 +1,14 @@
 version: "3.2"
 services:
+
+  transaction-service:
+    image: wesleyfuchter/transaction-service:v1
+    container_name: transaction-service
+    ports:
+        - 3000:3000
+
+  balance-service:
+    image: wesleyfuchter/balance-service:v1
+    container_name: balance-service
+    ports:
+        - 8080:8080
