@@ -2,15 +2,18 @@ const express = require('express')
 const bodyParser = require('body-parser')
 const amqplib = require('amqplib/callback_api')
 const { MongoClient } = require('mongodb')
+const os = require("os")
 
 const app = express()
 const port = 3000
-const host = 'host.minikube.internal';
+const host = 'host.minikube.internal'
 const queue = 'transactions'
 const amqp = `amqp://${host}:5672`
 const mongoUrl = `mongodb://${host}:27017`
 const mongoClient = new MongoClient(mongoUrl)
 const dbName = 'transactionsdb'
+const hostname = os.hostname()
+
 
 let channel = null
 let transactionsCollection = null
@@ -39,7 +42,7 @@ app.listen(port, () => {
 
 })
 
-app.post('/transactions', (req, res) => {
+app.post('/transaction-service/transactions', (req, res) => {
     const { body } = req
     console.log('sending message', body)
     transactionsCollection.insertOne(body).then(result => {
@@ -47,6 +50,6 @@ app.post('/transactions', (req, res) => {
       console.log(`inserted id is ${id}`)
       channel.sendToQueue(queue, Buffer.from(JSON.stringify({id, ...body})))      
     })
-    res.status(200).send()
+    res.status(200).send({'os.name': hostname})
 })
 
