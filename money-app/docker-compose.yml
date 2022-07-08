@@ -10,6 +10,8 @@ services:
     volumes:
         - ~/.docker-conf/rabbitmq/data/:/var/lib/rabbitmq/
         - ~/.docker-conf/rabbitmq/log/:/var/log/rabbitmq
+        - ./rabbitmq.conf:/etc/rabbitmq/rabbitmq.conf:ro
+        - ./definitions.json:/etc/rabbitmq/definitions.json:ro
     networks:
         - rabbitmq_go_net
 
