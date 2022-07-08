@@ -41,8 +41,11 @@ app.listen(port, () => {
 app.post('/transactions', (req, res) => {
     const { body } = req
     console.log('sending message', body)
-    channel.sendToQueue(queue, Buffer.from(JSON.stringify(body)))
-    transactionsCollection.insertOne(body).then(result => console.log('Inserted document =>', result))
+    transactionsCollection.insertOne(body).then(result => {
+      const id = result.insertedId.toString()
+      console.log(`inserted id is ${id}`)
+      channel.sendToQueue(queue, Buffer.from(JSON.stringify({id, ...body})))      
+    })
     res.status(200).send()
 })
 

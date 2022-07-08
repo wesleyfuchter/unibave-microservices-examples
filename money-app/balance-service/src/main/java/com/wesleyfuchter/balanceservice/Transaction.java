@@ -1,29 +1,33 @@
 package com.wesleyfuchter.balanceservice;
 
 public class Transaction {
-    
-    private int id;
+
+    private String id;
     private String accountId;
     private String description;
     private String type;
-    private double value;
+    private Double value;
 
     @Override
     public String toString() {
         return "{" +
-            " accountId='" + getAccountId() + "'" +
+            " id='" + getId() + "'" +
+            ", accountId='" + getAccountId() + "'" +
             ", description='" + getDescription() + "'" +
             ", type='" + getType() + "'" +
             ", value='" + getValue() + "'" +
             "}";
     }
 
-    
-    public int getId() {
+    public boolean isIncome() {
+        return type.equals("INCOME");
+    }
+        
+    public String getId() {
         return this.id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 
